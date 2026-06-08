@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>我的星系之旅</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <div class="page-wrapper">
+  <section id="hero" class="section">
+    <canvas id="meteor-canvas" aria-hidden="true"></canvas>
+    <h1 class="pixel-title">欢迎来到我的星际旅程</h1>
+    <div class="hero-content">
+      <div class="avatar-group">
+        <div class="pixel-frame floating">
+          <div class="frame-inner">
+            <img src="imgs/3.svg" alt="我的头像" class="avatar" id="avatar-img">
+          </div>
+          <div class="frame-corner tl"></div>
+          <div class="frame-corner tr"></div>
+          <div class="frame-corner bl"></div>
+          <div class="frame-corner br"></div>
+        </div>
+        <!-- 星际身份卡 -->
+        <div class="id-card" id="id-card">
+          <div class="id-card-border"></div>
+          <span class="id-label" id="id-label">SPACE-0000</span>
+          <button class="id-copy-btn" id="id-copy-btn" title="复制我的星际坐标">
+            <svg viewBox="0 0 16 16" width="14" height="14" class="id-copy-icon" id="id-copy-icon">
+              <rect x="2" y="0" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" rx="1"></rect>
+              <rect x="5" y="3" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" rx="1"></rect>
+            </svg>
+            <span class="id-copy-check" id="id-copy-check">✔</span>
+          </button>
+        </div>
+      </div>
+      <div class="speech-bubble pixel-bubble">
+        <span id="welcome-text">探索我的星际旅程吧！✨</span>
+        <div class="bubble-tail"></div>
+      </div>
+    </div>
+    <!-- 连接的好友行星轨道 -->
+    <div class="friend-planets-orbit" id="friend-planets-orbit"></div>
+    <div class="rocket-wrap">
+      <div class="rocket-ship">
+        <svg viewBox="0 0 48 64" class="rocket-svg" aria-hidden="true">
+          <!-- 火箭主体 -->
+          <rect x="16" y="8" width="16" height="32" fill="#e74c3c" rx="8"></rect>
+          <rect x="20" y="12" width="8" height="20" fill="#c0392b" rx="4"></rect>
+          <!-- 火箭窗口 -->
+          <rect x="20" y="16" width="8" height="8" fill="#88ccff" rx="4"></rect>
+          <rect x="22" y="18" width="4" height="4" fill="#0a0a2e" rx="2"></rect>
+          <!-- 火箭尾翼 -->
+          <rect x="8" y="32" width="8" height="16" fill="#e74c3c" rx="2"></rect>
+          <rect x="32" y="32" width="8" height="16" fill="#e74c3c" rx="2"></rect>
+          <!-- 火箭喷射火焰 -->
+          <rect x="20" y="40" width="4" height="8" fill="#f39c12" rx="1"></rect>
+          <rect x="24" y="40" width="4" height="10" fill="#e67e22" rx="1"></rect>
+          <rect x="20" y="48" width="2" height="6" fill="#f1c40f" rx="1"></rect>
+          <rect x="26" y="48" width="2" height="6" fill="#f1c40f" rx="1"></rect>
+          <!-- 像素小人（在窗口里） -->
+          <rect x="21" y="20" width="2" height="2" fill="#ffffff"></rect>
+          <rect x="25" y="20" width="2" height="2" fill="#ffffff"></rect>
+        </svg>
+      </div>
+    </div>
+    <div class="scroll-hint">▼ 向下探索 ▼</div>
+  </section>
+
+  <section id="portfolio" class="section">
+    <h2 class="section-title">银河碎片</h2>
+    <div class="galaxy-container" id="galaxy-container">
+      <canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+      <div class="galaxy-core"></div>
+      <div class="galaxy-orbits" id="galaxy-orbits"></div>
+    </div>
+
+    <div id="hidden-images" style="display:none"></div>
+
+    <div class="galaxy-modal" id="galaxy-modal">
+      <canvas id="modal-star-canvas" aria-hidden="true"></canvas>
+      <div class="galaxy-modal-bg"></div>
+      <div class="floating-images-container" id="floating-images-container"></div>
+      <button class="galaxy-modal-close" id="modal-close">✕</button>
+      <span class="modal-label" id="modal-label">星迹 01</span>
+    </div>
+  </section>
+
+  <section id="milky-way" class="section">
+    <div class="milky-way-band">
+      <canvas id="milky-canvas" aria-hidden="true"></canvas>
+      <div class="milky-stars"></div>
+    </div>
+    <p class="milky-text">穿越银河，连接星辰...</p>
+  </section>
+
+  <section id="footer" class="section">
+    <div class="social-links">
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-icon" title="Instagram">
+        <svg viewBox="0 0 24 24" width="48" height="48">
+          <rect x="2" y="2" width="20" height="20" fill="currentColor" rx="4"></rect>
+          <rect x="7" y="7" width="10" height="10" fill="#0a0a2e" rx="3"></rect>
+          <circle cx="17.5" cy="6.5" r="1.5" fill="#0a0a2e"></circle>
+        </svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener" class="social-icon" title="Rednote">
+        <svg viewBox="0 0 24 24" width="48" height="48">
+          <rect x="4" y="4" width="16" height="16" fill="currentColor" rx="4"></rect>
+          <rect x="8" y="8" width="8" height="8" fill="#0a0a2e" rx="2"></rect>
+          <circle cx="12" cy="12" r="2" fill="#0a0a2e"></circle>
+        </svg>
+        <span>Rednote</span>
+      </a>
+      <a href="https://www.douyin.com/" target="_blank" rel="noopener" class="social-icon" title="Douyin">
+        <svg viewBox="0 0 24 24" width="48" height="48">
+          <rect x="4" y="2" width="16" height="20" fill="currentColor" rx="3"></rect>
+          <rect x="8" y="8" width="8" height="8" fill="#0a0a2e"></rect>
+          <rect x="9" y="8" width="3" height="3" fill="currentColor"></rect>
+        </svg>
+        <span>Douyin</span>
+      </a>
+    </div>
+
+    <!-- 星际坐标探测仪 -->
+    <div class="space-detector" id="space-detector">
+      <div class="detector-neon" id="detector-neon"></div>
+      <h3 class="detector-title">✦ 星际坐标探测仪 ✦</h3>
+      <div class="detector-input-wrap">
+        <input type="text" class="detector-input" id="detector-input" placeholder="输入好友专属ID，如 SPACE-XXXX" maxlength="20" autocomplete="off">
+        <button class="detector-btn" id="detector-btn">🔍 探测</button>
+      </div>
+      <div class="detector-msg" id="detector-msg"></div>
+      <div class="detector-result" id="detector-result"></div>
+    </div>
+
+    <footer class="site-footer">
+      <p>© 2026 我的星系 · 用像素点亮宇宙</p>
+      <a href="edit.html" class="edit-link">编辑我的星系</a>
+    </footer>
+  </section>
+  </div>
+
+  <!-- 好友星域主页弹窗 -->
+  <div class="friend-profile-modal" id="friend-profile-modal" aria-hidden="true">
+    <div class="friend-profile-bg" id="friend-profile-bg"></div>
+    <div class="friend-profile-panel">
+      <button class="friend-profile-close" id="friend-profile-close" type="button" aria-label="关闭">✕</button>
+      <div class="friend-profile-header">
+        <img src="imgs/3.svg" alt="" class="friend-profile-avatar" id="friend-profile-avatar">
+        <div class="friend-profile-meta">
+          <span class="friend-profile-id" id="friend-profile-id">SPACE-0000</span>
+          <span class="friend-profile-hint" id="friend-profile-hint">探索 TA 的公开星域</span>
+        </div>
+      </div>
+      <div class="friend-profile-galaxy-wrap">
+        <h3 class="friend-profile-galaxy-title">银河碎片</h3>
+        <div class="friend-profile-galaxy" id="friend-profile-galaxy">
+          <canvas id="friend-galaxy-canvas" class="friend-galaxy-canvas" aria-hidden="true"></canvas>
+          <div class="galaxy-core friend-galaxy-core"></div>
+          <div class="friend-galaxy-orbits" id="friend-galaxy-orbits"></div>
+        </div>
+      </div>
+      <div class="friend-connect-wrap">
+        <button class="friend-connect-btn" id="friend-connect-btn" type="button">✦ 连接</button>
+        <button class="friend-disconnect-btn" id="friend-disconnect-btn" type="button">✧ 终止连接</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 星球碰撞动效（连接成功） -->
+  <div class="planet-collision-overlay" id="planet-collision-overlay" aria-hidden="true">
+    <canvas id="collision-canvas" aria-hidden="true"></canvas>
+    <p class="collision-caption" id="collision-caption">星域共振中……</p>
+  </div>
+
+  <script src="supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

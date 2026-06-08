@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>编辑我的星系</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="edit.css">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <div class="edit-container">
+    <div class="edit-header">
+      <h1 class="pixel-title">编辑我的星系</h1>
+    </div>
+
+    <div class="edit-section">
+      <div class="avatar-upload">
+        <img id="avatar-preview" src="imgs/3.svg" alt="头像预览">
+        <input type="file" id="avatar-input" accept="image/*" hidden>
+        <button class="upload-btn" id="avatar-btn">更换头像</button>
+          <div class="space-id-edit">
+            <label class="id-edit-label">✦ 个人坐标</label>
+            <div class="id-edit-row">
+              <span class="id-edit-prefix">SPACE-</span>
+              <input type="text" class="id-edit-input" id="space-id-input" maxlength="6" placeholder="134340" value="134340">
+              <span class="id-edit-hint">← 编辑你的专属ID</span>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="edit-section">
+      <h2 class="edit-section-title">社交链接</h2>
+      <div class="social-inputs">
+        <div class="input-group">
+          <label>Instagram</label>
+          <input type="url" id="ig-link" placeholder="https://instagram.com/...">
+        </div>
+        <div class="input-group">
+          <label>Rednote</label>
+          <input type="url" id="xhs-link" placeholder="https://xiaohongshu.com/...">
+        </div>
+        <div class="input-group">
+          <label>Douyin</label>
+          <input type="url" id="dy-link" placeholder="https://douyin.com/...">
+        </div>
+      </div>
+    </div>
+
+    <div class="edit-section">
+      <h2 class="edit-section-title">星球设置</h2>
+      <div class="planet-upload-grid" id="planet-grid"></div>
+      <button class="add-planet-btn" id="add-planet">+ 添加星球</button>
+    </div>
+
+    <div class="edit-actions">
+      <a href="index.html" class="back-link">← 返回星系</a>
+      <button class="save-btn" id="save-btn">保存设置</button>
+      <div class="share-link" id="share-link" style="display:none">
+        <div class="share-link-row">
+          <span class="share-link-label">✦ 分享链接</span>
+          <input type="text" id="share-url" readonly class="share-url-input">
+          <button class="share-copy-btn" id="copy-btn">复制</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-preview-modal" id="image-preview-modal">
+    <div class="image-preview-content">
+      <img id="preview-img" src="" alt="预览">
+      <button class="image-preview-close" id="preview-close">✕</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="edit.js"></script>
+</body>
+</html>
